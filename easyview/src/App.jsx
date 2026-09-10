@@ -3,6 +3,10 @@ import EcranSaisie from './composants/EcranSaisie'
 import Journal from './composants/Journal'
 import Balance from './composants/Balance'
 import GrandLivre from './composants/GrandLivre'
+import CompteResultat from './composants/CompteResultat'
+import Bilan from './composants/Bilan'
+import GestionExercices from './composants/GestionExercices'
+import GestionLicence from './composants/GestionLicence'
 import './App.css'
 
 export default function App() {
@@ -89,25 +93,50 @@ export default function App() {
           className={`nav-bouton ${ongletActif === 'saisie' ? 'actif' : ''}`}
           onClick={() => setOngletActif('saisie')}
         >
-          Saisie (E-05)
+          Saisie
         </button>
         <button
           className={`nav-bouton ${ongletActif === 'journal' ? 'actif' : ''}`}
           onClick={() => setOngletActif('journal')}
         >
-          Journal (E-07)
+          Journal
         </button>
         <button
           className={`nav-bouton ${ongletActif === 'livre' ? 'actif' : ''}`}
           onClick={() => setOngletActif('livre')}
         >
-          Grand Livre (E-08)
+          Grand Livre
         </button>
         <button
           className={`nav-bouton ${ongletActif === 'balance' ? 'actif' : ''}`}
           onClick={() => setOngletActif('balance')}
         >
-          Balance (E-09)
+          Balance
+        </button>
+        <div className="nav-separator"></div>
+        <button
+          className={`nav-bouton ${ongletActif === 'resultat' ? 'actif' : ''}`}
+          onClick={() => setOngletActif('resultat')}
+        >
+          Compte Résultat
+        </button>
+        <button
+          className={`nav-bouton ${ongletActif === 'bilan' ? 'actif' : ''}`}
+          onClick={() => setOngletActif('bilan')}
+        >
+          Bilan
+        </button>
+        <button
+          className={`nav-bouton ${ongletActif === 'exercices' ? 'actif' : ''}`}
+          onClick={() => setOngletActif('exercices')}
+        >
+          Exercices
+        </button>
+        <button
+          className={`nav-bouton ${ongletActif === 'licence' ? 'actif' : ''}`}
+          onClick={() => setOngletActif('licence')}
+        >
+          Licence
         </button>
         <button
           className="nav-bouton nav-reinit"
@@ -133,6 +162,18 @@ export default function App() {
         )}
         {ongletActif === 'balance' && (
           <Balance dossier={dossier} operations={operations} />
+        )}
+        {ongletActif === 'resultat' && (
+          <CompteResultat dossier={dossier} operations={operations} />
+        )}
+        {ongletActif === 'bilan' && (
+          <Bilan dossier={dossier} operations={operations} />
+        )}
+        {ongletActif === 'exercices' && (
+          <GestionExercices dossier={dossier} operations={operations} />
+        )}
+        {ongletActif === 'licence' && (
+          <GestionLicence />
         )}
       </main>
     </div>

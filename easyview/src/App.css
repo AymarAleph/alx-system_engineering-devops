@@ -104,6 +104,13 @@ body {
   font-weight: 600;
 }
 
+.nav-separator {
+  width: 1px;
+  background-color: #ddd;
+  height: 20px;
+  margin: 0 0.5rem;
+}
+
 .nav-reinit {
   margin-left: auto;
   color: #999;
