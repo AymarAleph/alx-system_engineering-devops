@@ -7,14 +7,25 @@ import CompteResultat from './composants/CompteResultat'
 import Bilan from './composants/Bilan'
 import GestionExercices from './composants/GestionExercices'
 import GestionLicence from './composants/GestionLicence'
+import ParametresEntreprise from './composants/ParametresEntreprise'
+import { REGIMES_FISCAUX } from './moteur/regimesFiscaux'
 import './App.css'
 
 export default function App() {
   const [operations, setOperations] = useState([])
   const [dossier, setDossier] = useState({
     nom: 'Nouveau dossier',
-    tauxTva: 18,
-    assujetti: true
+    raison_sociale: '',
+    secteur: 'Commerce',
+    regime: 'reel',
+    adresse: '',
+    telephone: '',
+    email: '',
+    exerciceDebut: '2026-01-01',
+    exerciceFin: '2026-12-31',
+    monnaie: 'XOF',
+    tauxTva: REGIMES_FISCAUX.reel.tva,
+    assujetti: REGIMES_FISCAUX.reel.assujetti
   })
   const [ongletActif, setOngletActif] = useState('saisie')
   const [nomDossierEdition, setNomDossierEdition] = useState('')
@@ -36,6 +47,10 @@ export default function App() {
       setNomDossierEdition('')
     }
   }, [nomDossierEdition])
+
+  const handleDossierChange = useCallback((nouveauDossier) => {
+    setDossier(nouveauDossier)
+  }, [])
 
   return (
     <div className="app">
@@ -89,6 +104,13 @@ export default function App() {
       )}
 
       <nav className="app-nav">
+        <button
+          className={`nav-bouton ${ongletActif === 'parametres' ? 'actif' : ''}`}
+          onClick={() => setOngletActif('parametres')}
+          title="Configuration du dossier et du régime fiscal"
+        >
+          ⚙ Paramètres
+        </button>
         <button
           className={`nav-bouton ${ongletActif === 'saisie' ? 'actif' : ''}`}
           onClick={() => setOngletActif('saisie')}
@@ -148,6 +170,12 @@ export default function App() {
       </nav>
 
       <main className="app-main">
+        {ongletActif === 'parametres' && (
+          <ParametresEntreprise
+            dossier={dossier}
+            onDossierChange={handleDossierChange}
+          />
+        )}
         {ongletActif === 'saisie' && (
           <EcranSaisie
             dossier={dossier}
